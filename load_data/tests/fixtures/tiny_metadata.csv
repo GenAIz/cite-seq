@@ -1,0 +1,51 @@
+Sample,Batch,Condition,Donor,CellType
+Cell0001,BatchA,Control,D01,CD4 T
+Cell0002,BatchA,Treated,D01,CD8 T
+Cell0003,BatchA,Control,D01,NK
+Cell0004,BatchA,Treated,D01,B cell
+Cell0005,BatchA,Control,D01,Monocyte
+Cell0006,BatchA,Treated,D01,CD4 T
+Cell0007,BatchA,Control,D01,CD8 T
+Cell0008,BatchA,Treated,D01,NK
+Cell0009,BatchA,Control,D01,B cell
+Cell0010,BatchA,Treated,D01,Monocyte
+Cell0011,BatchA,Control,D02,CD4 T
+Cell0012,BatchA,Treated,D02,CD8 T
+Cell0013,BatchA,Control,D02,NK
+Cell0014,BatchA,Treated,D02,B cell
+Cell0015,BatchA,Control,D02,Monocyte
+Cell0016,BatchA,Treated,D02,CD4 T
+Cell0017,BatchA,Control,D02,CD8 T
+Cell0018,BatchA,Treated,D02,NK
+Cell0019,BatchA,Control,D02,B cell
+Cell0020,BatchA,Treated,D02,Monocyte
+Cell0021,BatchA,Control,D03,CD4 T
+Cell0022,BatchA,Treated,D03,CD8 T
+Cell0023,BatchA,Control,D03,NK
+Cell0024,BatchA,Treated,D03,B cell
+Cell0025,BatchA,Control,D03,Monocyte
+Cell0026,BatchB,Treated,D03,CD4 T
+Cell0027,BatchB,Control,D03,CD8 T
+Cell0028,BatchB,Treated,D03,NK
+Cell0029,BatchB,Control,D03,B cell
+Cell0030,BatchB,Treated,D03,Monocyte
+Cell0031,BatchB,Control,D04,CD4 T
+Cell0032,BatchB,Treated,D04,CD8 T
+Cell0033,BatchB,Control,D04,NK
+Cell0034,BatchB,Treated,D04,B cell
+Cell0035,BatchB,Control,D04,Monocyte
+Cell0036,BatchB,Treated,D04,CD4 T
+Cell0037,BatchB,Control,D04,CD8 T
+Cell0038,BatchB,Treated,D04,NK
+Cell0039,BatchB,Control,D04,B cell
+Cell0040,BatchB,Treated,D04,Monocyte
+Cell0041,BatchB,Control,D05,CD4 T
+Cell0042,BatchB,Treated,D05,CD8 T
+Cell0043,BatchB,Control,D05,NK
+Cell0044,BatchB,Treated,D05,B cell
+Cell0045,BatchB,Control,D05,Monocyte
+Cell0046,BatchB,Treated,D05,CD4 T
+Cell0047,BatchB,Control,D05,CD8 T
+Cell0048,BatchB,Treated,D05,NK
+Cell0049,BatchB,Control,D05,B cell
+Cell0050,BatchB,Treated,D05,Monocyte

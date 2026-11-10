@@ -1,0 +1,19 @@
+# Config files - never bake user configs into the image
+my_config.json
+config_standard.json
+config_minimal.json
+config_advanced.json
+
+# Runtime artefacts
+data/
+results/
+logs/
+run/
+
+# Dev noise
+*.log
+.DS_Store
+.Rhistory
+.Rproj.user
+__pycache__/
+*.pyc

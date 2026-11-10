@@ -1,0 +1,32 @@
+function:
+    build:
+        repository: com.genaiz/cite-seq-cell-type-annotation
+        tag: com.genaiz/cite-seq-cell-type-annotation
+        version: latest
+    publish:
+        handle: cite-seq-cell-type-annotation
+        inputports:
+            - description: Processed Seurat object (.rds) from the processing step
+              handle: data
+              name: data
+            - description: Runtime configuration (config.json)
+              handle: configs
+              name: configs
+        outputports:
+            - description: Annotated Seurat object (.rds) with SingleR and/or STCAT labels
+              handle: output
+              name: output
+        name: CITE-seq Cell Type Annotation
+        oem: com.genaiz
+        propspecs:
+            - key: ANNOTATION_CONFIG
+              name: ANNOTATION_CONFIG
+              type: STRING
+              value: config.json
+        type: function
+        version: 1.0.0
+    run:
+        input: run/in
+        log: run/log
+        output: run/out
+        var: run/var

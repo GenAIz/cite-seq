@@ -1,0 +1,32 @@
+function:
+    build:
+        repository: com.genaiz/cite-seq-dge
+        tag: com.genaiz/cite-seq-dge
+        version: latest
+    publish:
+        handle: cite-seq-dge
+        inputports:
+            - description: Annotated Seurat object (.rds) from cell type annotation step
+              handle: data
+              name: data
+            - description: Runtime configuration (config.json)
+              handle: configs
+              name: configs
+        outputports:
+            - description: DGE results table (.rds and .csv) with gene-level statistics
+              handle: output
+              name: output
+        name: CITE-seq Differential Gene Expression
+        oem: com.genaiz
+        propspecs:
+            - key: DGE_CONFIG
+              name: DGE_CONFIG
+              type: STRING
+              value: config.json
+        type: function
+        version: 1.0.0
+    run:
+        input: run/in
+        log: run/log
+        output: run/out
+        var: run/var

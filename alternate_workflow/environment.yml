@@ -1,0 +1,55 @@
+name: tcell-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python=3.10
+
+  # Core packages
+  # numpy/pandas pinned to match STCAT 1.0.8's exact pip pins so the conda-resolved
+  # versions and the pip-installed stack agree (otherwise pip downgrades them at the
+  # pip stage, or the solve conflicts).
+  - numpy=1.26.4
+  - scipy
+  - pandas=2.2.0
+  - pyyaml
+
+  # Leiden clustering. Seurat's FindClusters(algorithm = 4) is Python-backed via
+  # reticulate, so this is what makes Leiden actually available. Without it the
+  # pipeline silently falls back to Louvain.
+  - leidenalg
+  - python-igraph
+
+  # h5py comes from PIP, not conda, deliberately. The conda-forge h5py/hdf5
+  # builds link the AWS I/O stack (libs2n), which requires OpenSSL >= 3.4
+  # symbols. reticulate embeds Python IN-PROCESS in R, and the R process has
+  # already loaded the base image's system libcrypto.so.3 (OpenSSL 3.0) - the
+  # dynamic linker reuses it, libs2n cannot resolve OPENSSL_3.4.0, and
+  # `import h5py` fails at run time even though it passes in a bare Python
+  # subprocess at build time. This workflow sits squarely on that path:
+  # load_data reads .h5ad/.h5mu through in-process anndata/muon, and
+  # cell_type_annotation reads STCAT's h5ad output the same way. The pip wheel
+  # bundles its own libhdf5 with no AWS/s2n linkage, removing the OpenSSL
+  # requirement entirely. Same fix as load_data/environment.yml and
+  # cell_type_annotation/environment.yml, where this silently broke .h5ad
+  # reading; run_load_data() now probes the in-process import and stops the
+  # run loudly rather than dropping the ADT data, so a conda h5py here would
+  # turn a silent data loss into a hard failure.
+  - pip
+
+  - pip:
+      # h5py MUST equal STCAT 1.0.8's exact pin: STCAT hard-requires
+      # h5py==3.12.1, so any other value makes the pip solve impossible.
+      # The 3.12.1 wheel bundles its own libhdf5 with no AWS/s2n linkage,
+      # so it keeps the OpenSSL fix (that is a conda-build property, not a
+      # version one). load_data/environment.yml has no STCAT and stays 3.11.0.
+      - h5py==3.12.1
+      - scanpy==1.9.3
+      - anndata==0.10.9
+      - mudata==0.3.2
+      - muon==0.1.7
+      - scikit-learn==1.2.2
+      - umap-learn==0.5.7
+      - STCAT==1.0.8

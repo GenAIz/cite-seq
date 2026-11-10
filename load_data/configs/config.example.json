@@ -1,0 +1,7 @@
+{
+  "_comment": "Example configuration for the load_data module. Copy to config.json and adjust paths. load_data_path points at ONE pre-processed object; RNA and ADT are separated automatically if both are present.",
+  "project_name": "CITEseqProject",
+  "load_data_path": "data/preprocessed_object.rds",
+  "output_name": "loaded_data.rds",
+  "verbose": true
+}

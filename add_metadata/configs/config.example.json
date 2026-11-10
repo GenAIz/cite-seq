@@ -1,0 +1,9 @@
+{
+  "_comment": "Example configuration for the add_metadata module. Copy to config.json and adjust. Join behaviour (col_types, subset_to_existing, overwrite_existing, add_match_status, backup_metadata, na_values) uses sensible defaults and is not exposed here; see config.md if you need them.",
+  "input_rds": "data/input_object.rds",
+  "object_key": "orig.ident",
+  "metadata_key": "Sample_ID",
+  "sheet": 1,
+  "output_name": "metadata.rds",
+  "verbose": true
+}

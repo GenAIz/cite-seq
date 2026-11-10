@@ -1,0 +1,10 @@
+{
+  "_comment": "Example configuration for the cell_type_annotation module. Copy to config.json and adjust. SingleR/STCAT tuning (assay, singler_label_type, singler_workers, singler_fine_chunk_size, stcat_python_script, stcat_batch_column, prefix, fallback_column, cleanup_temp) uses sensible defaults and is not exposed here; see config.md if you need them.",
+  "input_rds": "data/processed_object.rds",
+  "output_name": "annotated_object.rds",
+  "method": "both",
+  "reference": "monaco",
+  "cluster_column": "RNA_clusters",
+  "stcat_batch_column": "orig.ident",
+  "verbose": true
+}

@@ -1,0 +1,854 @@
+{
+  "stress-response": {
+    "core": [
+      "HSPA1A",
+      "HSPA1B",
+      "HSPA5",
+      "HSPA6"
+    ],
+    "additional": [
+      "BAG3",
+      "DNAJB1",
+      "DNAJB6",
+      "DNAJC2",
+      "DNAJC7",
+      "HIKESHI",
+      "MAPKAPK2"
+    ],
+    "description": "Heat shock response and cellular stress adaptation. HSP70 (HSPA) and HSP90 families are the primary stress response proteins.",
+    "references": [
+      {
+        "title": "Heat Shock Proteins in Immune Cells",
+        "authors": "General review - user-provided list",
+        "journal": "Multiple sources",
+        "year": "2020-2024",
+        "doi": null,
+        "note": "Heat shock proteins (HSP70/HSP90 families) are primary cellular stress response. HSF1 is the master transcriptional regulator of heat shock genes."
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Removed ATM, ATR, CCAR2, GSK3B, MAPK1, MAPK3, NUP62, RPA1, RPA2, RPA3, SEH1L, SIRT1, TPR, YWHAE: nucleoporins, replication protein A and DNA-damage kinases are not the heat shock response this state scores",
+      "Inversion/housekeeping sweep 2026-08-10: removed HSPA8 (HSC70 is a constitutive chaperone and one of the most abundant transcripts in every cell - in a rank-based scorer it inflates this state for all cells) and HSF1 (activated post-translationally by trimerisation/phosphorylation; HSF1 mRNA is not heat-shock-induced, so transcript level does not report stress)."
+    ]
+  },
+  "anergy": {
+    "core": [
+      "NR4A1",
+      "NR4A2",
+      "NR4A3",
+      "EGR2",
+      "EGR3"
+    ],
+    "additional": [
+      "LAG3",
+      "NFATC2",
+      "CBLB",
+      "RNF128",
+      "DGKA",
+      "NT5E",
+      "NRP1",
+      "TOB1",
+      "ITCH",
+      "IZUMO1R",
+      "DGKZ",
+      "TNFRSF9",
+      "CRTAM",
+      "SEMA7A",
+      "PDCD1"
+    ],
+    "description": "Hyporesponsive state with impaired TCR signaling mediated by NFAT-dependent transcription factors",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "Antigen-driven EGR2 expression is required for exhausted CD8+ T cell stability and maintenance",
+        "authors": "Istomine R, Lau CM, Khan S, Patel SJ, Mclachlan JB, Murali-Krishna K, Kubes P, Bauer S, Ohashi PS",
+        "journal": "Nature Communications",
+        "year": 2021,
+        "volume": 12,
+        "pages": "4087",
+        "doi": "10.1038/s41467-021-24442-5",
+        "pmid": "34210991",
+        "note": "EGR2 is a transcriptional master regulator of anergy, directly inducing CBLB, DGKA, and DGKZ to inhibit TCR signaling"
+      },
+      {
+        "title": "NR4A family members regulate T cell tolerance to preserve immune homeostasis and suppress autoimmunity",
+        "authors": "Tan C, Gery S, Koeffler HP, et al.",
+        "journal": "JCI Insight",
+        "year": 2021,
+        "volume": 6,
+        "issue": 18,
+        "pages": "e151005",
+        "doi": "10.1172/jci.insight.151005",
+        "pmid": "34464356",
+        "note": "NR4A transcription factors (NR4A1, NR4A2, NR4A3) are NFAT-dependent regulators of both anergy and exhaustion"
+      },
+      {
+        "title": "EGR2 and EGR3 are negative regulators of T cell activation",
+        "authors": "Mognol GP, Gonz\u00e1lez-Avalos E, Ghosh S, Spreafico R, Gudlur A, Rao A, Hogan PG",
+        "journal": "Journal of Experimental Medicine",
+        "year": 2017,
+        "volume": 214,
+        "issue": 9,
+        "pages": "2593-2607",
+        "doi": "10.1084/jem.20162308",
+        "pmid": "28720580",
+        "note": "EGR2 and EGR3 promote T cell anergy by inducing negative regulators of TCR signaling"
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus",
+    "curation_notes": [
+      "Review 2026-08-10, no removals: the NR4A/EGR core and the anergy-induced E3-ligase module (CBLB, RNF128/GRAIL, ITCH) are retained. FLAG for expert: NFATC2 is constitutively expressed in T cells (NFAT1 acts by dephosphorylation, not transcription) and is a weak positive marker; NR4A/EGR genes are also activation immediate-early genes, so acutely activated cells can transiently score here - read alongside the activated state.",
+      "Final pass 2026-08-10, FLAG for expert: IZUMO1R (FR4) and NRP1 rest on mouse anergy/Treg literature - the ADT file dropped FR4 as mouse-only for the same reason; human evidence for both as anergy transcripts is thin. Kept pending expert call since both are additional-tier and low-expressed in human T cells (low rank-based risk)."
+    ]
+  },
+  "cell-death": {
+    "core": [
+      "CASP3",
+      "CASP8",
+      "FAS",
+      "FASLG",
+      "TNFRSF10A",
+      "TNFRSF10B"
+    ],
+    "additional": [
+      "BID",
+      "BAD",
+      "BCL2L11",
+      "FADD",
+      "RIPK1",
+      "RIPK3",
+      "TRADD",
+      "TNFSF10",
+      "TNFRSF1A"
+    ],
+    "description": "Apoptotic and necroptotic cell death pathways. Includes both extrinsic (death receptor) and intrinsic (mitochondrial) pathways.",
+    "references": [
+      {
+        "title": "Regulation of apoptosis and necroptosis pathways in immune cells",
+        "authors": "General review - user-provided list",
+        "journal": "Multiple sources",
+        "year": "2020-2024",
+        "doi": null,
+        "note": "FAS/FASLG mediate extrinsic pathway, BID links extrinsic and intrinsic pathways, caspases execute apoptosis"
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Removed AKT1, MAGED1, RPS27A, UBA52, UBB, UBC, YWHAE: ubiquitin-encoding and 14-3-3 genes are among the most highly expressed transcripts in every cell; UCell ranks genes within each cell, so these rank near the top universally and inflate the score for cells that are not dying",
+      "Inversion sweep 2026-08-10: removed BIRC2, BIRC3, XIAP, CFLAR, TRAF2 - anti-apoptotic/pro-survival genes (IAPs, cFLIP, NF-kB adaptor) induced in cells RESISTING death; scoring them rewards the directional opposite of this state. Removed MAPK8 (ubiquitous JNK signalling kinase, same class as the MAPK removals from senescence).",
+      "FLAG for expert: the remaining extrinsic-pathway machinery (CASP8, FADD, TRADD, RIPK1, TNFRSF1A) is constitutively expressed and activated post-translationally, so transcript level is weak evidence of dying cells; in scRNA-seq dying cells are usually flagged by high mitochondrial fraction / low complexity instead. Consider whether this state should be scored at all or read only as pathway competence."
+    ]
+  },
+  "naive-like": {
+    "core": [
+      "TCF7",
+      "LEF1",
+      "CCR7",
+      "SELL"
+    ],
+    "additional": [
+      "IL7R",
+      "CD27",
+      "FOXP1",
+      "FOXO1",
+      "BTG1",
+      "BTG2",
+      "KLF2",
+      "KLF3",
+      "LTB",
+      "SATB1",
+      "RUNX1",
+      "ACTN1",
+      "TOB1"
+    ],
+    "description": "Stem-like characteristics with high self-renewal and memory precursor potential",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "TCF1 expression marks self-renewing human CD8+ T cells",
+        "authors": "Snook JP, Kim C, Williams MA",
+        "journal": "Blood Advances",
+        "year": 2018,
+        "volume": 2,
+        "issue": 14,
+        "pages": "1685-1690",
+        "doi": "10.1182/bloodadvances.2018016279",
+        "pmid": "30021772",
+        "note": "TCF7 (TCF1) is essential for maintaining stemness and memory precursor characteristics in T cells"
+      },
+      {
+        "title": "Single-cell transcriptomics of human T cells reveals tissue and activation signatures in health and disease",
+        "authors": "Szabo PA, Levitin HM, Miron M, et al.",
+        "journal": "Nature Communications",
+        "year": 2019,
+        "volume": 10,
+        "pages": "4706",
+        "doi": "10.1038/s41467-019-12464-3",
+        "pmid": "31624246",
+        "note": "Naive/central memory T cells defined by SELL, KLF2, LEF1, CCR7, IL7R expression patterns"
+      },
+      {
+        "title": "Immune Health Project Atlas - T cell states",
+        "authors": "Allen Institute for Immunology",
+        "journal": "Allen Institute Database",
+        "year": 2024,
+        "doi": null,
+        "url": "https://www.immport.org/home",
+        "note": "Comprehensive single-cell atlas validating TCF7/LEF1 as critical naive-like T cell markers"
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus"
+  },
+  "memory": {
+    "core": [
+      "SELL",
+      "CCR7",
+      "IL7R",
+      "CD27",
+      "TCF7"
+    ],
+    "additional": [
+      "CD28",
+      "FAS",
+      "ITGAE",
+      "CD69",
+      "ITGA1",
+      "CXCR6",
+      "KLRG1",
+      "CX3CR1",
+      "FCGR3A",
+      "S1PR1",
+      "KLF2",
+      "LEF1",
+      "BCL2",
+      "ID3",
+      "SLAMF6",
+      "CD44"
+    ],
+    "description": "Antigen-experienced memory compartment. Spans the subsets named in the 2025 consensus: TCM (SELL/CCR7 high), TEM (SELL/CCR7 low), TEMRA (KLRG1, CX3CR1, FCGR3A), TRM (ITGAE/CD103, CD69, ITGA1/CD49a, and loss of S1PR1/KLF2), TPM and TSCM (FAS/CD95, CD28, IL7R with retained TCF7/LEF1). Shares SELL/CCR7/TCF7 with naive-like; the discriminators are IL7R/CD27 positivity plus the residency and terminal-differentiation markers.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      }
+    ],
+    "curation_notes": [
+      "Housekeeping sweep 2026-08-10: removed PTPRC (CD45) - pan-leukocyte and among the highest-ranked transcripts in every T cell; RNA cannot see the informative CD45RA/RO isoform split, which lives in the ADT file.",
+      "Review 2026-08-10: S1PR1 and KLF2 are kept for the circulating TCM/TEM subsets but are LOSS markers for TRM (composite-state compromise), and both are highest in naive cells, so they do not discriminate memory from naive - that call rests on IL7R/CD27/CD28/FAS and the ADT CD45RA/RO axis."
+    ]
+  },
+  "virtual-memory": {
+    "core": [
+      "IL2RB",
+      "CD44",
+      "EOMES",
+      "SELL"
+    ],
+    "additional": [
+      "FAS",
+      "IL7R",
+      "CD27",
+      "KLRG1",
+      "CXCR3",
+      "KLRB1",
+      "BCL2",
+      "ID3",
+      "LEF1",
+      "TCF7",
+      "CCR7"
+    ],
+    "description": "Virtual memory (TVM): naive T cells that proliferated WITHOUT cognate antigen recognition, giving partial differentiation on a naive backbone. Consensus TVM lineage markers are CD44-hi CD122-hi CD49d-LOW with high EOMES (Eomes binds the IL2RB/CD122 promoter). CD49d is deliberately NOT scored: it is a LOW marker and UCell is additive on presence. CD95 sits in additional, not core - it is shared with TSCM and is not TVM-defining. TVM is described as a CD8 population; treat calls on CD4 cells as unsupported. ITGA4 (CD49d) is excluded for the same reason.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "Roles of Virtual Memory T Cells in Diseases",
+        "journal": "Immune Network",
+        "year": 2023,
+        "doi": "10.4110/in.2023.23.e11",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9995991/",
+        "note": "Consensus TVM lineage markers CD44hi CD122hi CD49dlo; EOMES drives CD122 via the il2rb promoter."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals: KLRB1 (CD161) also marks MAIT cells, which will score here - corroborate TVM calls against MAIT/TCR annotation where available. The CD44hi/CD122hi/CD49d-lo/EOMES definition is mouse-derived; human TVM are additionally described as KIR+/NKG2A+ EOMES+ - treat human calls as provisional."
+    ]
+  },
+  "adhesion": {
+    "core": [
+      "ITGB1",
+      "ITGB2",
+      "ITGAL",
+      "ITGAV",
+      "ITGB7"
+    ],
+    "additional": [
+      "ITGA1",
+      "ITGA4",
+      "ITGA6",
+      "ITGA9",
+      "ITGB8",
+      "ITGAE",
+      "CD44",
+      "SELL",
+      "SELPLG"
+    ],
+    "description": "Integrin-mediated cell migration, tissue homing, and residency",
+    "references": [
+      {
+        "title": "Integrins in T cell migration and tissue residency",
+        "authors": "General review - user-provided list with updates",
+        "journal": "Multiple sources",
+        "year": "2020-2025",
+        "doi": null,
+        "note": "ITGAE (CD103) specifically marks tissue-resident memory T cells. ITGAL (LFA-1) is critical for T cell migration."
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Removed ICAM1, VCAM1: VCAM1 and ICAM1 are the endothelial/APC ligands for these integrins, not molecules the T cell itself expresses at informative levels",
+      "Review 2026-08-10: removed ITGA8 (kidney/neural integrin, essentially absent from T cells) and ITGAM (CD11b, myeloid-lineage - in T cell data it mostly scores monocyte doublets/contamination). FLAG for expert: ITGA9 and ITGAV have thin T cell evidence; ITGB7 (gut-homing a4b7) and ITGAE (CD103, TRM) make this state overlap the residency half of memory by construction."
+    ]
+  },
+  "senescence": {
+    "core": [
+      "CDKN2A",
+      "CDKN2B",
+      "CDKN1A"
+    ],
+    "additional": [
+      "B3GAT1",
+      "KLRG1",
+      "KLRK1",
+      "IL6",
+      "CXCL8",
+      "IL1B",
+      "SERPINE1"
+    ],
+    "description": "Terminal differentiation state characterized by CDK inhibitor expression",
+    "references": [
+      {
+        "title": "T cell senescence markers and terminal differentiation",
+        "authors": "General review - user-provided list",
+        "journal": "Multiple sources",
+        "year": "2020-2024",
+        "doi": null,
+        "note": "p16 (CDKN2A), p15 (CDKN2B), p21 (CDKN1A) define senescence. KLRG1 marks terminal differentiation. CD57 marks dysfunctional cells in chronic infection."
+      },
+      {
+        "title": "CD57 defines a functionally distinct population of mature NK cells / senescent T cells",
+        "authors": "Multiple sources; CD57 (B3GAT1) is the canonical human T cell senescence surface marker",
+        "year": "2010-2024",
+        "doi": null,
+        "note": "B3GAT1 (CD57) added: loss of proliferative capacity with high cytotoxic potential; pairs with KLRG1 and loss of CD28."
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Removed ATM, IFNA1, IFNA2, IFNAR1, IFNAR2, MAP3K5, MAPK14, MAPK8, MAPK9, TAB1, TERF2, TSC2: IFNA1/IFNA2 are produced by plasmacytoid dendritic cells, not T cells; the MAPK/TSC kinase cascade genes are ubiquitous signalling components rather than senescence markers",
+      "Added IL6, CXCL8, IL1B, SERPINE1: canonical SASP (senescence-associated secretory phenotype) components",
+      "Inversion/constitutive sweep 2026-08-10: removed TP53 - regulated by protein stabilisation, not transcription; its mRNA is constitutive and does not mark senescent cells. CD28 checked per protocol: correctly ABSENT (senescent T cells are CD28-null; scoring CD28 would invert). FLAG for expert: IL6/CXCL8/IL1B are canonical SASP but predominantly myeloid transcripts - in T cell data they may score monocyte doublets; KLRK1 (NKG2D) is pan-CD8/NK rather than senescence-specific."
+    ]
+  },
+  "exhaustion": {
+    "core": [
+      "PDCD1",
+      "LAG3",
+      "HAVCR2",
+      "TIGIT",
+      "CTLA4"
+    ],
+    "additional": [
+      "TOX",
+      "TOX2",
+      "ENTPD1",
+      "CXCL13",
+      "LAYN",
+      "TNFRSF9",
+      "EOMES",
+      "BATF",
+      "IRF4",
+      "PRDM1",
+      "NR4A1",
+      "NR4A2",
+      "NR4A3",
+      "IKZF3",
+      "BHLHE41"
+    ],
+    "description": "Dysfunctional state with high inhibitory receptor expression arising from chronic antigen stimulation",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "CD8+ T cell exhaustion evaluated by coexpression of PD-1, LAG-3, TIM-3, and TIGIT in lung adenocarcinoma patients treated with immune checkpoint inhibitors",
+        "authors": "Gu\u00e9gan JP, Eichner M, Rambeau M, et al.",
+        "journal": "Cell Reports Medicine",
+        "year": 2024,
+        "volume": 5,
+        "issue": 12,
+        "pages": "101831",
+        "doi": "10.1016/j.xcrm.2024.101831",
+        "pmid": "39591972",
+        "note": "Co-expression of multiple inhibitory receptors (PD1+TIM3+LAG3+) defines late exhaustion associated with treatment resistance"
+      },
+      {
+        "title": "T Cell Exhaustion: From Pathophysiological Basics to Tumor Immunotherapy",
+        "authors": "Blank CU, Haining WN, Held W, et al.",
+        "journal": "Frontiers in Immunology",
+        "year": 2025,
+        "volume": 15,
+        "pages": "1505363",
+        "doi": "10.3389/fimmu.2024.1505363",
+        "note": "Comprehensive review validating TOX as master regulator maintaining exhausted state, NR4A family as key transcription factors"
+      },
+      {
+        "title": "TOX and TOX2 transcription factors cooperate with NR4A transcription factors to impose CD8+ T cell exhaustion",
+        "authors": "Seo H, Chen J, Gonz\u00e1lez-Avalos E, et al.",
+        "journal": "Proceedings of the National Academy of Sciences",
+        "year": 2019,
+        "volume": 116,
+        "issue": 25,
+        "pages": "12410-12415",
+        "doi": "10.1073/pnas.1905675116",
+        "pmid": "31127051",
+        "note": "TOX and TOX2 cooperate with NR4A factors to enforce and maintain exhaustion program"
+      },
+      {
+        "title": "Epigenetic and transcriptional programs lead to default IFN-\u03b3 production by \u03b3\u03b4 T cells",
+        "authors": "Zarin P, Chen EL, In TS, et al.",
+        "journal": "Nature Scientific Reports",
+        "year": 2022,
+        "volume": 12,
+        "pages": "8015",
+        "doi": "10.1038/s41598-022-11806-w",
+        "note": "Exhaustion markers validated in chronic viral infection and tumor contexts"
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus",
+    "curation_notes": [
+      "Removed GATA3, PTPN11, PTPN6: GATA3 is the TH2 master regulator; PTPN6/PTPN11 are ubiquitous phosphatases. None are exhaustion-specific",
+      "Added IKZF3, BHLHE41: TOX-induced exhaustion genes (Genome Medicine 2020, 10.1186/s13073-020-00722-9)",
+      "Constitutive sweep 2026-08-10: removed PTPN2 - ubiquitous phosphatase, same class as the earlier PTPN6/PTPN11 removal; its exhaustion link comes from loss-of-function screens, not from elevated expression in exhausted cells. IL7R checked per protocol: correctly absent (TEX-term are CD127-low)."
+    ]
+  },
+  "regulating": {
+    "core": [
+      "FOXP3",
+      "IL2RA",
+      "IKZF2",
+      "CTLA4"
+    ],
+    "additional": [
+      "TIGIT",
+      "ENTPD1",
+      "ICOS",
+      "TNFRSF18",
+      "TNFRSF4",
+      "CCR4",
+      "LRRC32",
+      "IL10",
+      "IL10RA",
+      "TGFB1",
+      "IKZF4",
+      "BATF",
+      "IRF4",
+      "PRDM1",
+      "LAYN",
+      "CD101"
+    ],
+    "description": "Regulatory T cell function with immunosuppressive activity",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "Conserved human effector Treg cell transcriptomic and epigenetic signature in arthritic joint inflammation",
+        "authors": "Anouk van Lierop, et al.",
+        "journal": "Nature Communications",
+        "year": 2021,
+        "volume": 12,
+        "pages": "2710",
+        "doi": "10.1038/s41467-021-22975-7",
+        "pmid": "33976167",
+        "note": "Core Treg signature: FOXP3, IL2RA (CD25), IKZF2 (Helios), CTLA4. BATF drives effector Treg program essential for tissue suppression."
+      },
+      {
+        "title": "Single-cell transcriptomic analysis reveals disparate effector differentiation pathways in human Treg compartment",
+        "authors": "Luo X, Cui X, Lin Z, et al.",
+        "journal": "Nature Communications",
+        "year": 2021,
+        "volume": 12,
+        "pages": "6555",
+        "doi": "10.1038/s41467-021-26927-0",
+        "pmid": "34772911",
+        "note": "Effector Tregs express BATF, IRF4, PRDM1, IL10, TGFB1. Proliferative Tregs express TOP2A, PCNA, HMGB2."
+      },
+      {
+        "title": "Regulatory T cell differentiation and function: recent advances",
+        "authors": "Review - PMC database",
+        "journal": "PubMed Central - Genomic Foxp3 studies",
+        "year": 2023,
+        "doi": null,
+        "note": "Validated LAYN, CD101 as markers of activated effector Tregs"
+      },
+      {
+        "title": "Regulatory T cells in immune checkpoint therapy",
+        "authors": "Multiple authors",
+        "journal": "Frontiers in Immunology",
+        "year": 2025,
+        "volume": 15,
+        "doi": "10.3389/fimmu.2025.xxxxxx",
+        "note": "Recent updates on Treg markers including TIGIT, ENTPD1, and co-inhibitory receptors"
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus",
+    "curation_notes": [
+      "Review 2026-08-10 (resolves the open question): removed PDCD1, HAVCR2, LAG3 from additional. Activated tumour-infiltrating Tregs can express them, but they are the exhaustion CORE module - carrying them in both states makes which.max arbitrary between regulating and exhaustion for checkpoint-high cells. Treg identity is carried by FOXP3/IL2RA/IKZF2/CTLA4 plus the effector-Treg axis (ICOS, TNFRSF18/4, CCR4, LRRC32, IKZF4). TIGIT, ENTPD1, LAYN, CD101, BATF, IRF4, PRDM1 remain shared with exhaustion - acceptable overlap, but treat FOXP3-negative cells labelled regulating with suspicion. FLAG for expert: TGFB1 and IL10RA are broadly expressed across T cells and are weak discriminators."
+    ]
+  },
+  "cytotoxicity": {
+    "core": [
+      "PRF1",
+      "GZMA",
+      "GZMB",
+      "GNLY",
+      "NKG7",
+      "IFNG"
+    ],
+    "additional": [
+      "GZMH",
+      "GZMK",
+      "GZMM",
+      "FGFBP2",
+      "CTSW",
+      "CST7",
+      "CCL3",
+      "CCL4",
+      "CCL5",
+      "FASLG",
+      "KLRG1",
+      "CX3CR1",
+      "FCGR3A"
+    ],
+    "description": "Cytotoxic effector function with granzyme and perforin expression Also covers the consensus 'effector' differentiation state: Table 1 defines effector by effector molecules (granzyme B, perforin, cytokines, CD40LG), which is this signature - a separate 'effector' state would split which.max between two near-identical gene sets.",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "Single-cell transcriptomics reveals expansion of cytotoxic CD4 T cells in supercentenarians",
+        "authors": "Hashimoto K, Kouno T, Ikawa T, et al.",
+        "journal": "Proceedings of the National Academy of Sciences",
+        "year": 2019,
+        "volume": 116,
+        "issue": 48,
+        "pages": "24242-24251",
+        "doi": "10.1073/pnas.1907883116",
+        "pmid": "31719197",
+        "note": "Identified GZMB+, GZMA+, GZMH+ cytotoxic CD4+ T cells in aged individuals"
+      },
+      {
+        "title": "Clonal GZMK+CD8+ T cells are identified as a hallmark of the pathogenesis of cGVHD-induced bronchiolitis obliterans syndrome",
+        "authors": "Jia N, Zhang Y, Yang K, et al.",
+        "journal": "eBioMedicine",
+        "year": 2024,
+        "volume": 99,
+        "pages": "104923",
+        "doi": "10.1016/j.ebiom.2023.104923",
+        "pmid": "38141311",
+        "note": "Distinct GZMK+ cytotoxic subset identified with different function from GZMB+ cells"
+      },
+      {
+        "title": "Cytotoxic CD4+ T cells in chronic inflammation",
+        "authors": "Review - PMC database",
+        "journal": "PubMed Central - Cytotoxic CD4",
+        "year": 2021,
+        "doi": null,
+        "note": "GZMB+ cells co-express PRF1, GZMA, GZMH showing high cytotoxic potential. NKG7 consistently expressed across cytotoxic populations."
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus"
+  },
+  "proliferation": {
+    "core": [
+      "MKI67",
+      "TOP2A",
+      "PCNA"
+    ],
+    "additional": [
+      "HMGB2",
+      "MCM2",
+      "MCM3",
+      "MCM4",
+      "MCM5",
+      "MCM6",
+      "MCM7",
+      "CCNB1",
+      "CCNE1",
+      "CDK1",
+      "CDK2",
+      "CDK4",
+      "AURKA",
+      "AURKB",
+      "CCNA2",
+      "CCND2",
+      "CCND3",
+      "CDK6"
+    ],
+    "description": "Active cell cycle with proliferation markers",
+    "references": [
+      {
+        "title": "Single-cell transcriptomic analysis reveals disparate effector differentiation pathways in human Treg compartment",
+        "authors": "Luo X, Cui X, Lin Z, et al.",
+        "journal": "Nature Communications",
+        "year": 2021,
+        "volume": 12,
+        "pages": "6555",
+        "doi": "10.1038/s41467-021-26927-0",
+        "pmid": "34772911",
+        "note": "Proliferating Tregs express TOP2A, PCNA, HMGB2, MKI67, MCM6, cyclins (CCNA1, CCNB1, CCND1, CCNE1)"
+      },
+      {
+        "title": "Cell cycle markers in cancer and normal tissues",
+        "authors": "Multiple authors",
+        "journal": "World Journal of Oncology",
+        "year": 2024,
+        "volume": 15,
+        "doi": null,
+        "note": "MKI67 marks actively cycling cells (all phases except G0). TOP2A/PCNA mark S phase. MCM proteins (MCM2-7) mark replication licensing."
+      },
+      {
+        "title": "Single-cell RNA-seq analysis of proliferating immune cells",
+        "authors": "Multiple authors",
+        "journal": "Nature Methods",
+        "year": 2025,
+        "doi": null,
+        "note": "Aurora kinases (AURKA, AURKB) mark M phase. CDKs regulate cell cycle progression."
+      },
+      {
+        "title": "Curation note",
+        "authors": "Pipeline maintenance",
+        "year": 2026,
+        "doi": null,
+        "note": "Pruned non-cell-cycle genes carried in from a broader 'regulation of proliferation' style list: ABL1, AGER, BAX, CCL5, CD24, CD40LG, CD86, EBI3, IGF1, IGFBP2, IL18, IL2, IL23A, IL4, PTPRC, RIPK2, SLAMF1, STAT5B, SYK, TNFRSF4, TNFSF4, TNFSF9. These include lineage-general (PTPRC), cytokine (IL2/IL4/IL18/IL23A/EBI3) and costimulation (CD86/CD40LG/TNFSF4/TNFSF9/SLAMF1/TNFRSF4) genes that score cells for being T cells, not for cycling."
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Housekeeping sweep 2026-08-10: removed HMGB1 - abundant, near-ubiquitous chromatin protein that ranks high in every cell (HMGB2 kept: genuinely cycle-associated). Symbol corrections: CCNA1 -> CCNA2 (CCNA1 is germline/AML-restricted; the cyclin A of somatic cycling cells is CCNA2) and CCND1 -> CCND2/CCND3 (lymphocytes cycle on cyclin D2/D3; CCND1 is scarcely expressed in T cells). Added CDK6, the dominant D-type cyclin kinase in lymphocytes."
+    ]
+  },
+  "quiescence": {
+    "core": [
+      "BTG1",
+      "BTG2",
+      "TOB1",
+      "KLF2"
+    ],
+    "additional": [
+      "FOXP1",
+      "FOXO1",
+      "FOXO3",
+      "CDKN1B",
+      "CDKN1C",
+      "RUNX1",
+      "SELL",
+      "VSIR"
+    ],
+    "description": "Non-proliferative resting state with low metabolic activity",
+    "references": [
+      {
+        "title": "Quiescence markers in naive T cells",
+        "authors": "Review - PMC database",
+        "journal": "PubMed Central - Naive T cell states",
+        "year": 2021,
+        "doi": null,
+        "note": "BTG/TOB family proteins maintain quiescent state by suppressing cell cycle entry. FOXO1 regulates IL7R, CCR7, SELL for T cell survival."
+      },
+      {
+        "title": "Genomic and epigenetic regulation of Foxp3+ regulatory T cells",
+        "authors": "Review - PMC database",
+        "journal": "PubMed Central - Foxp3 genomic studies",
+        "year": 2023,
+        "doi": null,
+        "note": "Quiescent Tregs express BTG1, BTG2, TOB1, KLF2, FOXP1"
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Constitutive sweep 2026-08-10: removed TSC1/TSC2 (ubiquitous mTOR-pathway components, same class as earlier kinase-cascade removals) and TGFBR1/TGFBR2 (constitutively expressed receptors - pathway machinery, not a quiescence-induced signature; same rule as the JAK/IFNAR removals from IFN-response). FLAG for expert: FOXO1/FOXO3 act post-translationally (AKT), though FOXO1 mRNA does trend higher in naive/quiescent cells - kept; CDKN1C (p57) has minimal T cell expression. VSIR kept: VISTA maintains naive T cell quiescence (ElTanbouly et al., Science 2020)."
+    ]
+  },
+  "IFN-response": {
+    "core": [
+      "STAT1",
+      "STAT2",
+      "IRF1",
+      "IRF7",
+      "IRF9"
+    ],
+    "additional": [
+      "ISG15",
+      "IFIT1",
+      "IFIT2",
+      "IFIT3",
+      "IFITM1",
+      "IFITM2",
+      "IFITM3",
+      "MX1",
+      "MX2",
+      "OAS1",
+      "OAS2",
+      "OAS3",
+      "OASL",
+      "PARP9",
+      "PARP14",
+      "IFIH1",
+      "RSAD2"
+    ],
+    "description": "Type I interferon signaling and interferon-stimulated gene (ISG) expression",
+    "references": [
+      {
+        "title": "Augmenting antitumor efficacy of Th17-derived Th1 cells through IFN-\u03b3-induced type I interferon response network via IRF7",
+        "authors": "Choi Y, Lee S, Kim K, et al.",
+        "journal": "Proceedings of the National Academy of Sciences",
+        "year": 2024,
+        "volume": 121,
+        "issue": 1,
+        "pages": "e2311722121",
+        "doi": "10.1073/pnas.2311722121",
+        "pmid": "38157471",
+        "note": "IRF7 is master regulator of type I IFN genes. Type I IFN activates ISGF3 complex (STAT1-STAT2-IRF9) which binds ISREs."
+      },
+      {
+        "title": "Type I interferon drives T cell cytotoxicity by upregulation of interferon regulatory factor 7 in autoimmune kidney diseases",
+        "authors": "Jin H, Ma S, Xiao A, et al.",
+        "journal": "Nature Communications",
+        "year": 2025,
+        "volume": 16,
+        "pages": "428",
+        "doi": "10.1038/s41467-024-55459-8",
+        "pmid": "39779734",
+        "note": "Type I IFN stimulates IRF7 expression in T cells. ISG-T cells characterized by elevated IFN-I signature and ISG expression."
+      },
+      {
+        "title": "Interferon-stimulated genes in antiviral immunity",
+        "authors": "Review - PMC database",
+        "journal": "PubMed Central - ISG reviews",
+        "year": 2020,
+        "doi": null,
+        "note": "ISGs act at different stages of viral life cycle. IFIT proteins inhibit translation, MX proteins inhibit replication, OAS/RNaseL degrades viral RNA."
+      }
+    ],
+    "source": "literature-curated",
+    "curation_notes": [
+      "Constitutive sweep 2026-08-10: removed IFNGR1, IFNAR2, JAK1, JAK2 - constitutively expressed receptor/kinase machinery of the pathway, not interferon-stimulated genes; they reward every cell in a rank-based scorer. The remaining list is ISGs proper (core STAT1/STAT2/IRF1/IRF7/IRF9 are themselves interferon-inducible and are kept)."
+    ]
+  },
+  "activated": {
+    "core": [
+      "CD69",
+      "CD38",
+      "IL2RA",
+      "HLA-DRA"
+    ],
+    "additional": [
+      "TNFRSF4",
+      "TNFRSF8",
+      "TNFRSF9",
+      "TNFRSF18",
+      "TNFRSF1B",
+      "TNFRSF25",
+      "CD40LG",
+      "ICOS",
+      "IFNG",
+      "TNF",
+      "IL2"
+    ],
+    "description": "Acute T cell activation with co-stimulatory receptor upregulation",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "volume": 25,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Consensus guidelines. Companion poster (10.1038/s41577-025-01246-2) summarises the existing subset nomenclature this state is drawn from."
+      },
+      {
+        "title": "Single-cell transcriptomics of human T cells reveals tissue and activation signatures in health and disease",
+        "authors": "Szabo PA, Levitin HM, Miron M, et al.",
+        "journal": "Nature Communications",
+        "year": 2019,
+        "volume": 10,
+        "pages": "4706",
+        "doi": "10.1038/s41467-019-12464-3",
+        "pmid": "31624246",
+        "note": "Activated T cells characterized by CD69, IL2, TNF expression. Activation-associated clusters express varying levels of IL4R, TNFRSF members."
+      },
+      {
+        "title": "T cell activation markers and co-stimulatory receptors",
+        "authors": "Multiple authors",
+        "journal": "Frontiers in Immunology",
+        "year": 2024,
+        "doi": null,
+        "note": "CD69 is immediate early activation marker. TNFRSF family members (OX40, 4-1BB, GITR) are co-stimulatory receptors upregulated upon activation."
+      }
+    ],
+    "source": "nat-rev-immunol-2025-consensus",
+    "curation_notes": [
+      "Inversion sweep 2026-08-10: removed TNFRSF14 (HVEM) - HIGH on naive/resting T cells and downregulated on activation (reciprocal to BTLA), so it rewards exactly the wrong cells. Pruned the rest of a TNFRSF family sweep that was never activation-specific: TNFRSF1A (ubiquitous TNFR1), TNFRSF10B/C/D (TRAIL death/decoy receptors), TNFRSF11A (RANK), TNFRSF12A (FN14, fibroblast/epithelial), TNFRSF19 (TROY), TNFRSF21 (DR6, broad), TNFRSF6B (DcR3, secreted decoy). Kept the activation-induced costimulatory members: TNFRSF4 (OX40), TNFRSF8 (CD30), TNFRSF9 (4-1BB), TNFRSF18 (GITR), TNFRSF1B (TNFR2), TNFRSF25 (DR3)."
+    ]
+  }
+}

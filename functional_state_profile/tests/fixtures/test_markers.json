@@ -1,0 +1,14 @@
+{
+  "exhaustion": {
+    "core": ["PDCD1", "LAG3", "HAVCR2"],
+    "additional": ["CTLA4", "TIGIT"]
+  },
+  "naive-like": {
+    "core": ["CCR7", "LEF1", "TCF7"],
+    "additional": ["SELL", "IL7R"]
+  },
+  "cytotoxicity": {
+    "core": ["GZMB", "PRF1", "NKG7"],
+    "additional": ["GNLY", "GZMA"]
+  }
+}

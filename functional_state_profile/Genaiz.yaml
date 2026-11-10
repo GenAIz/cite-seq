@@ -1,0 +1,35 @@
+function:
+    build:
+        repository: com.genaiz/cite-seq-functional-state-profile
+        tag: com.genaiz/cite-seq-functional-state-profile
+        version: latest
+    publish:
+        handle: cite-seq-functional-state-profile
+        inputports:
+            - description: Annotated Seurat object (.rds) from the upstream node
+              handle: data
+              name: data
+            - description: Runtime marker JSON uploads
+              handle: attachment
+              name: attachment
+            - description: Runtime configuration (config.json)
+              handle: configs
+              name: configs
+        outputports:
+            - description: Seurat object with UCell state scores and dominant_state labels, plus CSV export
+              handle: output
+              name: output
+        name: CITE-seq Functional State Profile
+        oem: com.genaiz
+        propspecs:
+            - key: FSP_CONFIG
+              name: FSP_CONFIG
+              type: STRING
+              value: config.json
+        type: function
+        version: 1.0.0
+    run:
+        input: run/in
+        log: run/log
+        output: run/out
+        var: run/var

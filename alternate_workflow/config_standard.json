@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "project_name": "CellProject",
+    "description": "T cell CITE-seq analysis pipeline"
+  },
+  "paths": {
+    "input_data": {
+      "rna_path": "/raw/rna_data.h5ad",
+      "adt_path": "/raw/adt_data.h5ad",
+      "metadata_file": null
+    },
+    "output_dir": "/results",
+    "logs_dir": "/logs"
+  },
+  "execution": {
+    "mode": "step-by-step",
+    "steps": [
+      "load_data",
+      "process_seurat",
+      "cell_type_annotation",
+      "aggregate_ml"
+    ],
+    "verbose": true,
+    "n_cores": 8
+  },
+  "load_data": {
+    "project_name": "CellProject",
+    "species_name": "human"
+  },
+  "cell_type_annotation": {
+    "method": "both",
+    "reference": "monaco",
+    "cluster_column": "RNA_clusters",
+    "assay": "RNA",
+    "singler_label_type": [
+      "main",
+      "fine"
+    ],
+    "singler_workers": 8,
+    "singler_fine_chunk_size": 20000,
+    "stcat_python_script": null,
+    "stcat_batch_column": "orig.ident",
+    "prefix": null,
+    "fallback_column": "SingleR_fine",
+    "cleanup_temp": true
+  },
+  "add_metadata": {
+    "enabled": false,
+    "merge_by": "MULTI_ID",
+    "merge_by_metadata": "Specimen Barcode"
+  },
+  "processing": {
+    "use_disk_backed": true,
+    "adt_filters": {
+      "keep_pattern": null,
+      "drop_pattern": "isotype"
+    },
+    "normalization": {
+      "rna_method": "LogNormalize",
+      "adt_method": "CLR"
+    },
+    "qc_filters": {
+      "min_features": 200,
+      "max_features": 6000,
+      "max_percent_mt": 20,
+      "max_percent_rp": 40,
+      "min_cells": 3,
+      "min_cells_per_sample": 500
+    },
+    "doublets": {
+      "detect": true,
+      "remove": true,
+      "sample_column": null,
+      "use_adt": true,
+      "adt_quantile": 0.9,
+      "min_cells": 50,
+      "seed": 42
+    },
+    "features": {
+      "n_features": 5000
+    },
+    "reduction": {
+      "pca_dims_rna": 30,
+      "pca_dims_adt": 10
+    },
+    "clustering": {
+      "rna_resolution": 1.5,
+      "wnn_resolution": 1.5,
+      "k_param": 30,
+      "algorithm": 1
+    }
+  },
+  "aggregation": {
+    "participant_col": "Participant ID",
+    "timepoint_col": "Timepoint",
+    "celltype_cols": [
+      "Prediction"
+    ],
+    "preserve_columns": [
+      "Sample",
+      "Treatment"
+    ]
+  },
+  "batch": {
+    "column": "orig.ident",
+    "detect": true,
+    "correct": "auto",
+    "harmony_theta": 2,
+    "harmony_niter": 10,
+    "lisi_threshold": 0.7,
+    "silhouette_threshold": 0.15,
+    "silhouette_n_cells": 5000,
+    "wasserstein_threshold": 0.3,
+    "min_cells_per_batch": 50,
+    "adt_correction_method": "harmony",
+    "adt_kbet_threshold": 0.6,
+    "adt_guardrail_min_improvement": 0.05
+  }
+}

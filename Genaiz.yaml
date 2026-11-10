@@ -1,0 +1,108 @@
+solution:
+    description: cite-seq
+    handle: cite-seq
+    name: CITE-seq
+    oem: com.genaiz
+    version: 1.0.0
+    workflows:
+        - name: cite-seq-pipeline
+          description: Full CITE-seq T cell analysis pipeline
+          handle: cite-seq-pipeline
+          links:
+            - lhsnode: load-data-node
+              lhsnodeport: output
+              rhsnode: add-metadata-node
+              rhsnodeport: data
+            - lhsnode: add-metadata-node
+              lhsnodeport: output
+              rhsnode: cell-type-annotation-node
+              rhsnodeport: data
+            - lhsnode: cell-type-annotation-node
+              lhsnodeport: output
+              rhsnode: differential-gene-expression-node
+              rhsnodeport: data
+            - lhsnode: cell-type-annotation-node
+              lhsnodeport: output
+              rhsnode: functional-state-profile-node
+              rhsnodeport: data
+          nodes:
+            - name: load-data-node
+              handle: load-data-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-load-data
+                version: 1.0.0
+            - name: add-metadata-node
+              handle: add-metadata-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-add-metadata
+                version: 1.0.0
+            - name: cell-type-annotation-node
+              handle: cell-type-annotation-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-cell-type-annotation
+                version: 1.0.0
+            - name: differential-gene-expression-node
+              handle: differential-gene-expression-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-dge
+                version: 1.0.0
+            - name: functional-state-profile-node
+              handle: functional-state-profile-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-functional-state-profile
+                version: 1.0.0
+        - name: Load Data
+          description: Run only the Load Data smart function
+          handle: load-data-only
+          nodes:
+            - name: load-data-node
+              handle: load-data-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-load-data
+                version: 1.0.0
+        - name: Add Metadata
+          description: Run only the Add Metadata smart function
+          handle: add-metadata-only
+          nodes:
+            - name: add-metadata-node
+              handle: add-metadata-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-add-metadata
+                version: 1.0.0
+        - name: Cell Type Annotation
+          description: Run only the Cell Type Annotation smart function
+          handle: cell-type-annotation-only
+          nodes:
+            - name: cell-type-annotation-node
+              handle: cell-type-annotation-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-cell-type-annotation
+                version: 1.0.0
+        - name: Differential Gene Expression
+          description: Run only the Differential Gene Expression smart function
+          handle: differential-gene-expression-only
+          nodes:
+            - name: differential-gene-expression-node
+              handle: differential-gene-expression-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-dge
+                version: 1.0.0
+        - name: Functional State Profile
+          description: Run only the Functional State Profile smart function
+          handle: functional-state-profile-only
+          nodes:
+            - name: functional-state-profile-node
+              handle: functional-state-profile-node
+              sf:
+                oem: com.genaiz
+                handle: cite-seq-functional-state-profile
+                version: 1.0.0

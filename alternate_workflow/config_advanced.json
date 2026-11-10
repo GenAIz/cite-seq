@@ -1,0 +1,131 @@
+{
+  "metadata": {
+    "project_name": "MultiSiteTcellStudy",
+    "description": "Advanced multi-site analysis with 200k+ cells"
+  },
+  "paths": {
+    "input_data": {
+      "rna_path": "/raw/combined_rna.h5ad",
+      "adt_path": "/raw/combined_adt.h5ad",
+      "metadata_file": "/absolute/path/to/comprehensive_metadata.xlsx"
+    },
+    "output_dir": "/results/multisite_2024",
+    "logs_dir": "/logs"
+  },
+  "output_files": {
+    "load_data": "multisite_load_data.rds",
+    "add_metadata": "multisite_add_metadata.rds",
+    "process_seurat": "multisite_process_seurat.rds",
+    "cell_type_annotation": "multisite_cell_type_annotation.rds",
+    "aggregate_ml": "multisite_aggregate_ml.xlsx"
+  },
+  "execution": {
+    "mode": "step-by-step",
+    "steps": [
+      "load_data",
+      "add_metadata",
+      "process_seurat",
+      "cell_type_annotation",
+      "aggregate_ml"
+    ],
+    "verbose": true,
+    "n_cores": 16
+  },
+  "load_data": {
+    "project_name": "MultiSiteTcellStudy",
+    "species_name": "human"
+  },
+  "add_metadata": {
+    "enabled": true,
+    "merge_by": "cell_id",
+    "merge_by_metadata": "Cell ID"
+  },
+  "cell_type_annotation": {
+    "method": "both",
+    "reference": "monaco",
+    "cluster_column": "RNA_clusters",
+    "assay": "RNA",
+    "singler_label_type": [
+      "main",
+      "fine"
+    ],
+    "singler_workers": 16,
+    "singler_fine_chunk_size": 20000,
+    "stcat_python_script": null,
+    "stcat_batch_column": "Batch",
+    "prefix": null,
+    "fallback_column": "SingleR_fine",
+    "cleanup_temp": true
+  },
+  "processing": {
+    "use_disk_backed": true,
+    "adt_filters": {
+      "keep_pattern": null,
+      "drop_pattern": "isotype"
+    },
+    "normalization": {
+      "rna_method": "SCT",
+      "adt_method": "CLR"
+    },
+    "qc_filters": {
+      "min_features": 300,
+      "max_features": 7000,
+      "max_percent_mt": 15,
+      "max_percent_rp": 35,
+      "min_cells": 3,
+      "min_cells_per_sample": 500
+    },
+    "doublets": {
+      "detect": true,
+      "remove": true,
+      "sample_column": null,
+      "use_adt": true,
+      "adt_quantile": 0.9,
+      "min_cells": 50,
+      "seed": 42
+    },
+    "features": {
+      "n_features": 5000
+    },
+    "reduction": {
+      "pca_dims_rna": 50,
+      "pca_dims_adt": 15
+    },
+    "clustering": {
+      "rna_resolution": 2.0,
+      "wnn_resolution": 2.0,
+      "k_param": 50
+    }
+  },
+  "aggregation": {
+    "participant_col": "Participant ID",
+    "timepoint_col": "Timepoint",
+    "celltype_cols": [
+      "Prediction",
+      "SingleR_main"
+    ],
+    "preserve_columns": [
+      "Site",
+      "Batch",
+      "Sample",
+      "Treatment",
+      "Response"
+    ]
+  },
+  "batch": {
+    "_comment": "Batch effect detection and correction settings",
+    "column": "orig.ident",
+    "detect": true,
+    "correct": "auto",
+    "harmony_theta": 2,
+    "harmony_niter": 15,
+    "lisi_threshold": 0.7,
+    "silhouette_threshold": 0.15,
+    "silhouette_n_cells": 5000,
+    "wasserstein_threshold": 0.3,
+    "min_cells_per_batch": 50,
+    "adt_correction_method": "harmony",
+    "adt_kbet_threshold": 0.6,
+    "adt_guardrail_min_improvement": 0.05
+  }
+}

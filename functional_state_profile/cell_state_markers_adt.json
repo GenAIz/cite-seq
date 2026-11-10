@@ -1,0 +1,368 @@
+{
+  "_comment": "Surface (ADT/protein) marker panel for functional-state scoring. Run with assay='ADT'. Markers are written in canonical form; '_aliases' below maps each to the other names vendors use, so one file works across panels. Add a line to _aliases when a new panel names something differently. Keys starting with '_' are not states.",
+  "_aliases": {
+    "PD-1": [
+      "CD279",
+      "PDCD1"
+    ],
+    "LAG3": [
+      "CD223"
+    ],
+    "TIM3": [
+      "CD366",
+      "HAVCR2"
+    ],
+    "CTLA-4": [
+      "CD152"
+    ],
+    "ICOS": [
+      "CD278"
+    ],
+    "OX40": [
+      "CD134",
+      "TNFRSF4"
+    ],
+    "4-1BB": [
+      "CD137",
+      "TNFRSF9"
+    ],
+    "CD40L": [
+      "CD154",
+      "CD40LG"
+    ],
+    "CCR7": [
+      "CD197"
+    ],
+    "CXCR3": [
+      "CD183"
+    ],
+    "CXCR5": [
+      "CD185"
+    ],
+    "CCR4": [
+      "CD194"
+    ],
+    "CCR6": [
+      "CD196"
+    ],
+    "CXCR6": [
+      "CD186"
+    ],
+    "HLA-DR": [
+      "HLA.DR",
+      "HLADR",
+      "DR"
+    ],
+    "CD39": [
+      "ENTPD1"
+    ],
+    "CD73": [
+      "NT5E"
+    ],
+    "CD127": [
+      "IL7R"
+    ],
+    "CD25": [
+      "IL2RA"
+    ],
+    "CD122": [
+      "IL2RB"
+    ],
+    "CD62L": [
+      "SELL"
+    ],
+    "CD103": [
+      "ITGAE"
+    ],
+    "CD49a": [
+      "ITGA1"
+    ],
+    "CD95": [
+      "FAS"
+    ],
+    "CD57": [
+      "B3GAT1"
+    ],
+    "CD16": [
+      "FCGR3A"
+    ],
+    "BTLA": [
+      "CD272"
+    ],
+    "NKG2D": [
+      "CD314"
+    ],
+    "CD107a": [
+      "LAMP1"
+    ],
+    "CD31": [
+      "PECAM1"
+    ],
+    "CD71": [
+      "TFRC"
+    ],
+    "CD94": [
+      "KLRD1"
+    ],
+    "CD11b": [
+      "ITGAM"
+    ],
+    "CD244": [
+      "2B4"
+    ],
+    "CD226": [
+      "DNAM-1",
+      "DNAM1"
+    ],
+    "CD160": [
+      "BY55"
+    ]
+  },
+  "naive-like": {
+    "core": [
+      "CD62L",
+      "CCR7",
+      "CD45RA",
+      "CD27"
+    ],
+    "additional": [
+      "CD28",
+      "CD127",
+      "CXCR4",
+      "CD31"
+    ],
+    "description": "Naive: CD62L+ CCR7+ CD45RA+ CD27+ and CD95-LOW. CD95 is the discriminator against TSCM and virtual memory, which are otherwise naive by surface phenotype - so CD95 is deliberately NOT listed here; its absence is the evidence.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals: CD31 (PECAM1) marks recent thymic emigrants within CD4 naive only; CXCR4 is broadly expressed but naive-enriched. Both additional-tier."
+    ]
+  },
+  "memory": {
+    "core": [
+      "CD45RO",
+      "CD62L",
+      "CD127",
+      "CD27"
+    ],
+    "additional": [
+      "CCR7",
+      "CD95",
+      "CD28",
+      "CD103",
+      "CD69",
+      "CD49a",
+      "CD45RA",
+      "KLRG1",
+      "CX3CR1",
+      "CD16",
+      "CD44",
+      "CXCR6",
+      "CD122"
+    ],
+    "description": "Memory. TCM CD62L+CCR7+CD45RO+; TEM CD62L-CCR7-; TEMRA re-expresses CD45RA with KLRG1/CX3CR1/CD16; TRM CD103+CD69+CD49a+; TSCM CD95+CD28+CD127+ on a CD45RA+ background.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals. FLAG for expert: human CD44 is high on essentially all T cells (a mouse-derived discriminator, weak on human panels); CD122 is shared with the virtual-memory core."
+    ]
+  },
+  "virtual-memory": {
+    "core": [
+      "CD122",
+      "CD44",
+      "CD45RA",
+      "CD62L"
+    ],
+    "additional": [
+      "CD95",
+      "CD127",
+      "CD27",
+      "KLRG1",
+      "CXCR3"
+    ],
+    "description": "Virtual memory (TVM): naive T cells that proliferated WITHOUT cognate antigen, giving antigen-experience markers on a naive backbone. Consensus TVM lineage markers are CD44-hi CD122-hi CD49d-LOW with high EOMES (Eomes binds the IL2RB/CD122 promoter). CD49d is deliberately NOT scored: it is a LOW marker and UCell is additive on presence. CD95 sits in additional, not core - it is shared with TSCM and is not TVM-defining. TVM is described as a CD8 population; treat calls on CD4 cells as unsupported.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ]
+  },
+  "activated": {
+    "core": [
+      "CD69",
+      "CD25",
+      "CD38",
+      "HLA-DR"
+    ],
+    "additional": [
+      "4-1BB",
+      "OX40",
+      "ICOS",
+      "CD40L",
+      "PD-1",
+      "CD71",
+      "CD27"
+    ],
+    "description": "Acute activation: CD69 earliest, then CD25/CD38/HLA-DR and co-stimulatory TNFRSF members. CD69 is also a residency marker - read with CD103 before calling activation in tissue. The guidelines note 'activated' is often used as a synonym for 'effector' but carries fewer inferences about fate or longevity.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals. FLAG for expert: CD27 is constitutive on naive/memory and LOST on terminal effectors, so it is not activation-specific - kept in additional because acute activation transiently upregulates it; CD71 (TFRC, added to _aliases) is a solid activation/proliferation marker."
+    ]
+  },
+  "exhaustion": {
+    "core": [
+      "PD-1",
+      "LAG3",
+      "TIM3",
+      "TIGIT",
+      "CD39"
+    ],
+    "additional": [
+      "CD101",
+      "CD244",
+      "CD160",
+      "CXCR5",
+      "CD38"
+    ],
+    "description": "Progressive exhaustion. TPEX are CXCR5+ PD-1-intermediate and retain proliferative capacity; TEX-term are CD101+CD38+ with dense co-inhibitory expression and low CD127. Requires chronic antigen - not inferable from PD-1 alone, which is also an activation marker.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Inversion sweep 2026-08-10: removed CD127 - exhausted T cells are CD127-LOW (the description itself says TEX-term have low CD127); scoring it rewards naive/memory cells. This is the addendum's predicted inversion. Removed BTLA - highest on naive CD8 and downregulated with progressive differentiation (Baitsch/Derre, JCI 2010); tumour-specific TILs can re-express it, but for a general classifier it is naive-weighted. Client panel note: TIM3 is absent from the client's 161-marker panel, so core scores on 4 markers there."
+    ]
+  },
+  "regulating": {
+    "core": [
+      "CD25",
+      "CTLA-4",
+      "CD39"
+    ],
+    "additional": [
+      "CD73",
+      "TIGIT",
+      "ICOS",
+      "OX40",
+      "4-1BB",
+      "CCR4",
+      "CD15s"
+    ],
+    "description": "Treg: CD25-HIGH plus CTLA-4 and the CD39/CD73 adenosine axis. The defining CD127-LOW half of the phenotype is deliberately NOT scored: UCell signatures are additive on presence, so a low/negative marker would reward exactly the wrong cells. FOXP3 is likewise absent - intracellular, never on a surface panel. This state is therefore weaker on ADT than RNA; corroborate with the RNA file.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals. FLAG for expert: human Tregs are largely CD73-low at the protein level (CD39/CD73 co-expression is a mouse-weighted expectation); CD15s marks the most suppressive effector Tregs but is panel-dependent."
+    ]
+  },
+  "cytotoxicity": {
+    "core": [
+      "CD57",
+      "KLRG1",
+      "CX3CR1",
+      "CD16"
+    ],
+    "additional": [
+      "NKG2D",
+      "CD94",
+      "CD244",
+      "CD11b",
+      "CD107a",
+      "CD40L",
+      "CD226"
+    ],
+    "description": "Cytotoxic effector phenotype. This state also covers the consensus 'effector' differentiation state: Table 1 defines effector by effector MOLECULES (granzyme B, perforin, CD40L), which on a surface panel are visible only as CD107a degranulation and CD40L. A separate 'effector' state would duplicate this one and split which.max between two near-identical signatures.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Review 2026-08-10, no removals. FLAG for expert: CD94 (KLRD1) pairs with inhibitory NKG2A as often as activating NKG2C and is NK-weighted; CD11b on T cells marks only a small effector CD8 subset and is otherwise myeloid; CD107a (LAMP1) reports degranulation and is surface-visible mainly after stimulation, so it contributes little on resting cells. All three are additional-tier."
+    ]
+  },
+  "anergy": {
+    "core": [
+      "CD5",
+      "PD-1",
+      "CD73"
+    ],
+    "additional": [
+      "LAG3",
+      "CD44",
+      "CD39"
+    ],
+    "description": "Anergy: hyporesponsive despite antigen. CD5-high with PD-1 but WITHOUT CD25/CD69 separates anergy from activation. FR4 (folate receptor 4), the classic partner to CD73, is mouse literature and absent from human panels - dropped for that reason.",
+    "source": "nat-rev-immunol-2025-consensus",
+    "references": [
+      {
+        "title": "Guidelines for T cell nomenclature",
+        "authors": "Masopust D, Soerens AG, Quarnstrom CF, Ahmed R, et al.",
+        "journal": "Nature Reviews Immunology",
+        "year": 2025,
+        "doi": "10.1038/s41577-025-01238-2",
+        "note": "Surface markers per the consensus guidelines and companion poster (10.1038/s41577-025-01246-2)."
+      }
+    ],
+    "curation_notes": [
+      "Inversion sweep 2026-08-10: removed CD25 and CD69 - this state's own description defines anergy as PD-1+ WITHOUT CD25/CD69; scoring them positively rewarded exactly the activated cells anergy must be separated from. FLAG for expert: CD5 is on all T cells (anergy uses CD5-HIGH, a shift rather than presence/absence), so it is a weak discriminator in a rank-based scorer - kept so core does not fall to two markers."
+    ]
+  }
+}

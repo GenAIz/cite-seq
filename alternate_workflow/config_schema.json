@@ -1,0 +1,619 @@
+{
+  "_comment": "REFERENCE DOCUMENTATION ONLY - THIS FILE IS NOT ENFORCED. Nothing loads it: validate_config_schema() in script/validation_module.R checks only that six top-level sections are present, and this file is not even COPYed into the Docker image. It had drifted badly from the code (output_files, cell_type_annotation and export_loupe were absent entirely; add_metadata was missing 7 keys; aggregation.assays was missing). It has been brought back in line with what orchestrator.R actually reads, but keep in mind that a typo in a config will NOT be caught here. Wiring this up with jsonvalidate is tracked separately - it would reject configs that currently run, so it needs a deliberate decision.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "T cell Workflow Configuration",
+  "type": "object",
+  "required": [
+    "metadata",
+    "paths",
+    "execution",
+    "load_data",
+    "processing",
+    "aggregation"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "project_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": [
+        "input_data",
+        "output_dir"
+      ],
+      "properties": {
+        "input_data": {
+          "type": "object",
+          "properties": {
+            "rna_path": {
+              "type": "string",
+              "description": "Path to RNA matrix (H5AD, H5, RDS, CSV)"
+            },
+            "adt_path": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Path to ADT matrix (optional)"
+            },
+            "metadata_file": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Path to Excel metadata file"
+            }
+          }
+        },
+        "output_dir": {
+          "type": "string"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "step-by-step",
+            "chained"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verbose": {
+          "type": "boolean"
+        },
+        "n_cores": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "load_data": {
+      "type": "object",
+      "properties": {
+        "project_name": {
+          "type": "string"
+        },
+        "species_name": {
+          "type": "string",
+          "enum": [
+            "human",
+            "mouse",
+            "other"
+          ]
+        },
+        "top_mouse_genes": {
+          "type": "integer",
+          "description": "Number of top-expressed genes checked when inferring species from the matrix",
+          "default": 100
+        },
+        "rds_rna_key": {
+          "type": "string",
+          "description": "List element name holding the RNA matrix when loading a .rds list",
+          "default": "rna"
+        },
+        "rds_adt_key": {
+          "type": "string",
+          "description": "List element name holding the ADT matrix when loading a .rds list",
+          "default": "adt"
+        },
+        "join_layers": {
+          "type": "boolean",
+          "description": "Join per-sample v5 layers into a single counts layer after loading a directory of .rds files",
+          "default": true
+        }
+      }
+    },
+    "add_metadata": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "merge_by": {
+          "type": "string"
+        },
+        "merge_by_metadata": {
+          "type": "string"
+        },
+        "sheet": {
+          "type": "string",
+          "description": "Worksheet name or index in the metadata workbook."
+        },
+        "col_types": {
+          "type": "object",
+          "description": "Per-column type overrides passed to the reader."
+        },
+        "na_values": {
+          "type": "array",
+          "description": "Extra strings to treat as NA.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overwrite_existing": {
+          "type": "boolean",
+          "description": "Overwrite metadata columns that already exist on the object."
+        },
+        "subset_to_existing": {
+          "type": "boolean",
+          "description": "Keep only cells that match a metadata row."
+        },
+        "add_match_status": {
+          "type": "boolean",
+          "description": "Add a column recording whether each cell matched a metadata row."
+        },
+        "backup_metadata": {
+          "type": "boolean",
+          "description": "Snapshot the original meta.data before merging, so it can be restored."
+        }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "properties": {
+        "use_disk_backed": {
+          "type": "boolean"
+        },
+        "normalization": {
+          "type": "object",
+          "properties": {
+            "rna_method": {
+              "type": "string",
+              "enum": [
+                "LogNormalize",
+                "SCT"
+              ]
+            },
+            "adt_method": {
+              "type": "string",
+              "enum": [
+                "CLR",
+                "LogNormalize"
+              ],
+              "description": "NOT READ BY THE PIPELINE. ADT normalisation is chosen inside .normalize_adt() (CLR, or ADTnorm when batch correction is enabled); only normalization.rna_method is consumed. Retained for reference; setting it has no effect."
+            }
+          }
+        },
+        "qc_filters": {
+          "type": "object",
+          "properties": {
+            "min_features": {
+              "type": "integer"
+            },
+            "max_features": {
+              "type": "integer"
+            },
+            "max_percent_mt": {
+              "type": "number"
+            },
+            "max_percent_rp": {
+              "type": "number"
+            },
+            "min_cells": {
+              "type": "integer"
+            },
+            "min_cells_per_sample": {
+              "type": "integer"
+            }
+          }
+        },
+        "adt_filters": {
+          "type": "object",
+          "properties": {
+            "keep_pattern": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "drop_pattern": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "features": {
+          "type": "object",
+          "properties": {
+            "n_features": {
+              "type": "integer"
+            }
+          }
+        },
+        "reduction": {
+          "type": "object",
+          "properties": {
+            "pca_dims_rna": {
+              "type": "integer",
+              "description": "RNA PCA dimensions used downstream",
+              "default": 30
+            },
+            "pca_dims_adt": {
+              "type": "integer",
+              "description": "ADT PCA dimensions used downstream",
+              "default": 10
+            }
+          }
+        },
+        "clustering": {
+          "type": "object",
+          "properties": {
+            "rna_resolution": {
+              "type": "number"
+            },
+            "wnn_resolution": {
+              "type": "number"
+            },
+            "k_param": {
+              "type": "integer"
+            },
+            "algorithm": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "description": "Seurat clustering algorithm (1=Louvain, 4=Leiden)",
+              "default": 1
+            }
+          }
+        },
+        "doublets": {
+          "type": "object",
+          "description": "Doublet detection and removal. Detection runs per capture (scDblFinder on RNA) with an optional ADT cross-lineage confirmation, after cell/gene QC and before normalisation, batch correction and clustering.",
+          "properties": {
+            "detect": {
+              "type": "boolean",
+              "description": "Run doublet detection",
+              "default": true
+            },
+            "remove": {
+              "type": "boolean",
+              "description": "Remove detected doublets, as for other QC filters. When false they are flagged in metadata and retained.",
+              "default": true
+            },
+            "sample_column": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Metadata column identifying the capture/library. Detection is run separately per capture. Falls back to batch.column, then orig.ident."
+            },
+            "use_adt": {
+              "type": "boolean",
+              "description": "Use the ADT cross-lineage co-expression signature as a confirmatory signal on CITE-seq data",
+              "default": true
+            },
+            "adt_quantile": {
+              "type": "number",
+              "description": "Per-marker upper-tail quantile defining ADT positivity for the cross-lineage check",
+              "default": 0.9,
+              "minimum": 0.5,
+              "maximum": 0.999
+            },
+            "min_cells": {
+              "type": "integer",
+              "description": "Minimum cells for a capture to be classified",
+              "default": 50
+            },
+            "seed": {
+              "type": "integer",
+              "description": "Random seed for scDblFinder",
+              "default": 42
+            }
+          }
+        },
+        "use_sketch": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Force sketch mode. null = auto (enabled at >= 850,000 cells)."
+        },
+        "sketch_ncells": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Cells to retain in the sketch. null = 40% of total."
+        },
+        "sketch_method": {
+          "type": "string",
+          "enum": [
+            "LeverageScore",
+            "Uniform"
+          ],
+          "description": "Sketching algorithm",
+          "default": "LeverageScore"
+        },
+        "remove_ids": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "orig.ident values to drop before QC"
+        }
+      }
+    },
+    "aggregation": {
+      "type": "object",
+      "properties": {
+        "participant_col": {
+          "type": "string"
+        },
+        "timepoint_col": {
+          "type": "string"
+        },
+        "celltype_cols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preserve_columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assays": {
+          "type": "array",
+          "description": "Assays to aggregate into the pseudobulk matrix.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "batch": {
+      "type": "object",
+      "description": "Batch effect detection and correction settings",
+      "properties": {
+        "column": {
+          "type": "string",
+          "description": "Metadata column holding batch labels",
+          "default": "orig.ident"
+        },
+        "detect": {
+          "type": "boolean",
+          "description": "Run batch effect detection metrics (LISI, silhouette, Wasserstein)",
+          "default": true
+        },
+        "correct": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Correction control for BOTH modalities: 'auto' corrects when detection flags it; true forces; false disables. Overridden per-modality by correct_rna / correct_adt.",
+          "default": "auto"
+        },
+        "correct_rna": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "RNA-only correction control ('auto'/true/false). Falls back to 'correct' when omitted."
+        },
+        "correct_adt": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "ADT-only correction control ('auto'/true/false). Falls back to 'correct' when omitted."
+        },
+        "harmony_theta": {
+          "type": "number",
+          "description": "Harmony diversity penalty theta",
+          "default": 2
+        },
+        "harmony_niter": {
+          "type": "integer",
+          "description": "Maximum Harmony iterations",
+          "default": 10
+        },
+        "lisi_threshold": {
+          "type": "number",
+          "description": "Fraction of n_batches below which median iLISI triggers the batch flag",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "silhouette_threshold": {
+          "type": "number",
+          "description": "Mean silhouette width above which the batch flag is set",
+          "default": 0.15
+        },
+        "silhouette_n_cells": {
+          "type": "integer",
+          "description": "Max cells to subsample for silhouette computation (O(n^2) memory)",
+          "default": 5000,
+          "minimum": 100
+        },
+        "wasserstein_threshold": {
+          "type": "number",
+          "description": "Per-protein mean Wasserstein distance above which a protein is flagged",
+          "default": 0.3
+        },
+        "min_cells_per_batch": {
+          "type": "integer",
+          "description": "Minimum cells per batch for reliable detection",
+          "default": 50,
+          "minimum": 1
+        },
+        "adt_correction_method": {
+          "type": "string",
+          "enum": [
+            "harmony",
+            "adtnorm",
+            "none"
+          ],
+          "description": "HOW ADT batch correction is applied when detection (or forcing) says it should run: 'harmony' corrects the apca embedding (marker values untouched), 'adtnorm' corrects the CLR data layer, 'none' disables ADT correction even when recommended.",
+          "default": "harmony"
+        },
+        "adt_kbet_threshold": {
+          "type": "number",
+          "description": "kBET rejection rate on the provisional ADT PCA above which the ADT batch flag is set during detection.",
+          "default": 0.6,
+          "minimum": 0,
+          "maximum": 1
+        },
+        "adt_guardrail_min_improvement": {
+          "type": "number",
+          "description": "Minimum drop in kBET rejection (before - after) for a correction to be ADOPTED; otherwise it is reverted and the object keeps the uncorrected ADT.",
+          "default": 0.05,
+          "minimum": 0
+        }
+      }
+    },
+    "output_files": {
+      "type": "object",
+      "description": "Per-step output filenames. Every key is optional; orchestrator.R falls back to '<step>.rds'.",
+      "properties": {
+        "load_data": {
+          "type": "string",
+          "description": "Filename for the load_data step output."
+        },
+        "add_metadata": {
+          "type": "string",
+          "description": "Filename for the add_metadata step output."
+        },
+        "process_seurat": {
+          "type": "string",
+          "description": "Filename for the process_seurat step output. Its basename is also used as output_prefix for QC side-files."
+        },
+        "cell_type_annotation": {
+          "type": "string",
+          "description": "Filename for the cell_type_annotation step output."
+        },
+        "aggregate_ml": {
+          "type": "string",
+          "description": "Filename for the aggregate_ml workbook; any extension is normalised to .xlsx."
+        }
+      }
+    },
+    "cell_type_annotation": {
+      "type": "object",
+      "description": "Cell-type annotation step. All keys optional; defaults shown are applied in orchestrator.R.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Annotation method.",
+          "enum": [
+            "singler",
+            "stcat",
+            "both"
+          ],
+          "default": "both"
+        },
+        "reference": {
+          "type": "string",
+          "description": "celldex reference name (case-insensitive).",
+          "default": "monaco"
+        },
+        "cluster_column": {
+          "type": "string",
+          "description": "Metadata column holding cluster IDs.",
+          "default": "RNA_clusters"
+        },
+        "assay": {
+          "type": "string",
+          "description": "Assay used for annotation.",
+          "default": "RNA"
+        },
+        "singler_label_type": {
+          "type": "array",
+          "description": "SingleR label granularity.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "main",
+              "fine"
+            ]
+          }
+        },
+        "singler_workers": {
+          "type": "integer",
+          "description": "Parallel workers for SingleR; defaults to execution.n_cores."
+        },
+        "stcat_python_script": {
+          "type": "string",
+          "description": "Path to a custom STCAT driver script."
+        },
+        "stcat_batch_column": {
+          "type": "string",
+          "description": "Metadata column identifying batches for the T-subset re-embedding sent to STCAT; more than one level triggers Harmony correction of that embedding. Falls back to batch.column.",
+          "default": "orig.ident"
+        },
+        "singler_fine_chunk_size": {
+          "type": "integer",
+          "description": "Cells per chunk in the per-cell SingleR fine annotation pass. Memory scales with the chunk, not the dataset.",
+          "default": 20000,
+          "minimum": 1
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix prepended to annotation column names."
+        },
+        "fallback_column": {
+          "type": "string",
+          "description": "Column used when a cell has no confident call.",
+          "default": "SingleR_fine"
+        },
+        "cleanup_temp": {
+          "type": "boolean",
+          "description": "Delete STCAT temp files afterwards.",
+          "default": true
+        }
+      }
+    },
+    "export_loupe": {
+      "type": "object",
+      "description": "Loupe browser export step. Requires the loupeR package; validate_step_requirements() checks this up front.",
+      "properties": {
+        "source_step": {
+          "type": "string",
+          "description": "Step whose .rds is exported. Must be a single-cell object, not the pseudobulk aggregate.",
+          "default": "cell_type_annotation"
+        },
+        "output_name": {
+          "type": "string",
+          "description": "Base name for the .cloupe file; a run timestamp is appended."
+        },
+        "assays": {
+          "type": "array",
+          "description": "Assays to include.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "executable_path": {
+          "type": "string",
+          "description": "Explicit path to the louper executable if not auto-discovered."
+        }
+      }
+    }
+  }
+}

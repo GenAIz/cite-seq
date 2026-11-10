@@ -1,0 +1,32 @@
+function:
+    build:
+        repository: com.genaiz/cite-seq-load-data
+        tag: com.genaiz/cite-seq-load-data
+        version: latest
+    publish:
+        handle: cite-seq-load-data
+        inputports:
+            - description: Raw input data (RNA .h5/.h5ad/.h5mu/.rds, ADT .h5ad/.rds, metadata .xlsx/.csv)
+              handle: data
+              name: data
+            - description: Runtime configuration (config.json)
+              handle: configs
+              name: configs
+        outputports:
+            - description: Loaded Seurat object (.rds) ready for downstream processing
+              handle: output
+              name: output
+        name: CITE-seq Load Data
+        oem: com.genaiz
+        propspecs:
+            - key: LOAD_DATA_CONFIG
+              name: LOAD_DATA_CONFIG
+              type: STRING
+              value: config.json
+        type: function
+        version: 1.0.0
+    run:
+        input: run/in
+        log: run/log
+        output: run/out
+        var: run/var

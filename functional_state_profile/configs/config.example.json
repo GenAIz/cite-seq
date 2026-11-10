@@ -1,0 +1,14 @@
+{
+  "_comment": "Example configuration for the functional_state_profile module.",
+  "input_rds": "data/annotated_object.rds",
+  "output_rds": "functional_state_object.rds",
+  "output_csv": "functional_state_scores.csv",
+  "use_core_only": false,
+  "use_hvg": false,
+  "assay": "RNA",
+  "maxRank": 1500,
+  "min_score": null,
+  "ncores": 1,
+  "run_validation": true,
+  "verbose": true
+}

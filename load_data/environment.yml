@@ -1,0 +1,50 @@
+name: scanpy-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python=3.10
+
+  # Core scientific stack
+  #
+  # numpy stays PINNED at 1.26.4: the whole stack below is solved and verified
+  # against it, and an unpinned numpy resolving to 2.x has broken this env
+  # before (scanpy 1.9.3 / np.float_, which silently made every .h5mu input
+  # unloadable while the test suite stayed green). scanpy 1.10.4 works with
+  # numpy < 2 - do not unpin without re-verifying the full import chain.
+  - numpy=1.26.4
+  - scipy
+  - pandas=2.2.0
+  - pyyaml
+
+  # h5py comes from PIP, not conda, deliberately. The conda-forge h5py/hdf5
+  # builds link the AWS I/O stack (libs2n), which requires OpenSSL >= 3.4
+  # symbols. reticulate embeds Python IN-PROCESS in R, and the R process has
+  # already loaded the base image's system libcrypto.so.3 (OpenSSL 3.0) - the
+  # dynamic linker reuses it, libs2n cannot resolve OPENSSL_3.4.0, and
+  # `import h5py` fails at run time even though it passes in a bare Python
+  # subprocess at build time. The pip wheel bundles its own libhdf5 with no
+  # AWS/s2n linkage, removing the OpenSSL requirement entirely.
+  - pip
+  - pip:
+      - h5py==3.11.0
+      # anndata 0.11+ is REQUIRED to read files written by current anndata /
+      # mudata: modern writers store string columns (including the obs _index)
+      # with the nullable-string-array encoding, which anndata 0.10.x has no
+      # reader for. A real 6.8 GB h5mu from the team failed exactly there
+      # (IORegistryError on /mod/PROTEIN/obs/_index). This env DELIBERATELY
+      # DIVERGES from alternate_workflow/cell_type_annotation, whose Python envs
+      # are hard-pinned by STCAT 1.0.8 (anndata==0.10.9) - load_data ships no
+      # STCAT, and it is the only module that reads user h5ad/h5mu files, so
+      # it alone must track the current on-disk format. mudata 0.3.10 is the
+      # newest release for python 3.10 (0.4.x needs 3.11); it reads the
+      # MuData 0.1.0 container written by newer mudata. scanpy 1.10.4 is the
+      # matching release for anndata 0.11 (1.9.3 predates it). Verified
+      # against the real failing file: all obs/var/index elements of both
+      # modalities parse under this exact pin set on python 3.10.
+      - anndata==0.11.4
+      - mudata==0.3.10
+      - muon==0.1.7
+      - scanpy==1.10.4
